@@ -5,67 +5,82 @@
 package com.lenny.sortfunction.sortfunctions;
 
 /**
- *
  * @author Phi Long
  */
 public class HeapSort {
+    private String details;
 
-    public void sort(int arr[]) {
-        int N = arr.length;
+    public HeapSort() {
+    }
+
+    public HeapSort(String details) {
+        this.details = details;
+    }
+
+    public static double[] sort(double[] arr) {
+        int n = arr.length;
 
         // Build heap (rearrange array)
-        for (int i = N / 2 - 1; i >= 0; i--) {
-            heapify(arr, N, i);
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapify(arr, n, i);
         }
 
         // One by one extract an element from heap
-        for (int i = N - 1; i > 0; i--) {
+        for (int i = n - 1; i > 0; i--) {
             // Move current root to end
-            int temp = arr[0];
+            double temp = arr[0];
             arr[0] = arr[i];
             arr[i] = temp;
 
             // call max heapify on the reduced heap
             heapify(arr, i, 0);
         }
+        return arr;
     }
 
     // To heapify a subtree rooted with node i which is
     // an index in arr[]. n is size of heap
-    public void heapify(int arr[], int N, int i) {
+    public static void heapify(double[] arr, int n, int i) {
         int largest = i; // Initialize largest as root
         int l = 2 * i + 1; // left = 2*i + 1
         int r = 2 * i + 2; // right = 2*i + 2
 
         // If left child is larger than root
-        if (l < N && arr[l] > arr[largest]) {
+        if (l < n && arr[l] > arr[largest]) {
             largest = l;
         }
 
         // If right child is larger than largest so far
-        if (r < N && arr[r] > arr[largest]) {
+        if (r < n && arr[r] > arr[largest]) {
             largest = r;
         }
 
         // If largest is not root
         if (largest != i) {
-            int swap = arr[i];
+            double swap = arr[i];
             arr[i] = arr[largest];
             arr[largest] = swap;
 
             // Recursively heapify the affected sub-tree
-            heapify(arr, N, largest);
+            heapify(arr, n, largest);
         }
     }
 
     /* A utility function to print array of size n */
-    public static void printArray(int arr[]) {
-        int N = arr.length;
-
-        for (int i = 0; i < N; ++i) {
-            System.out.print(arr[i] + " ");
+    public static void printArray(double[] arr) {
+        System.out.print("Array after sort: ");
+        for (double i : arr) {
+            System.out.print(i + " ");
         }
         System.out.println("\nHeap Sort\nComplexity: O(N log N)");
 
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }

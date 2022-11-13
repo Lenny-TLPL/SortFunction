@@ -1,21 +1,28 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ *
+ * @Author Phi Long
  */
 package com.lenny.sortfunction.sortfunctions;
 
 /**
- *
  * @author Phi Long
  */
 public class InsertionSort {
-    public void sort(int arr[])
-    {
+    private String details;
+
+    public InsertionSort(String details) {
+        this.details = details;
+    }
+
+    public InsertionSort() {
+    }
+
+    public static double[] sort(double[] arr) {
         int n = arr.length;
         for (int i = 1; i < n; ++i) {
-            int key = arr[i];
+            double key = arr[i];
             int j = i - 1;
-  
+
             /* Move elements of arr[0..i-1], that are
                greater than key, to one position ahead
                of their current position */
@@ -25,15 +32,21 @@ public class InsertionSort {
             }
             arr[j + 1] = key;
         }
+        return arr;
     }
-  
+
     /* A utility function to print array of size n*/
-    public static void printArray(int arr[])
-    {
-        int n = arr.length;
-        for (int i = 0; i < n; ++i)
-            System.out.print(arr[i] + " ");
-  
+    public static void printArray(double[] arr) {
+        System.out.print("Array after sort: ");
+        for (double j : arr) System.out.print(j + " ");
         System.out.println("\nInsertion Sort\nComplexity: O(N^2) ");
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }

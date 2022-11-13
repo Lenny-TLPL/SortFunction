@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ *
+ * @Author Phi Long
  */
 package com.lenny.sortfunction.sortfunctions;
 
@@ -9,7 +9,24 @@ package com.lenny.sortfunction.sortfunctions;
  * @author Phi Long
  */
 public class SelectionSort {
-    public void sort(int arr[])
+    private String details;
+
+    public SelectionSort() {
+    }
+
+    public SelectionSort(String details) {
+        this.details = details;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public static double[] sort(double[] arr)
     {
         int n = arr.length;
  
@@ -24,18 +41,18 @@ public class SelectionSort {
  
             // Swap the found minimum element with the first
             // element
-            int temp = arr[min_idx];
+            double temp = arr[min_idx];
             arr[min_idx] = arr[i];
             arr[i] = temp;
         }
+        return arr;
     }
  
     // Prints the array
-    public void printArray(int arr[])
+    public static void printArray(double[] arr)
     {
-        int n = arr.length;
-        for (int i=0; i<n; ++i)
-            System.out.print(arr[i]+" ");
+        System.out.print("Array after sort: ");
+        for (double j : arr) System.out.print(j + " ");
         System.out.println("\nSelection Sort\nComplexity: O(N^2)");
     }
 }

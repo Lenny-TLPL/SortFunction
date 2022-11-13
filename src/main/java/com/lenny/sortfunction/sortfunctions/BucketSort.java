@@ -1,54 +1,72 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ *
+ * @Author Phi Long
  */
 package com.lenny.sortfunction.sortfunctions;
 
 import java.util.Collections;
-import java.util.Vector;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
- *
  * @author Phi Long
  */
 public class BucketSort {
+    private String details;
 
-    public static void bucketSort(float arr[], int n) {
-        if (n <= 0) {
-            return;
+    public BucketSort() {
+
+    }
+
+    public BucketSort(String details) {
+        this.details = details;
+    }
+
+    public static double[] bucketSort(double[] array, int bktSize) {
+
+        //creating a list of buckets for storing lists
+        List<Double>[] buckets = new List[bktSize];
+// Linked list with each bucket array index
+// as there may be hash collision
+        for (int i = 0; i < bktSize; i++) {
+            buckets[i] = new LinkedList<>();
         }
-
-        // 1) Create n empty buckets
-        @SuppressWarnings("unchecked")
-        Vector<Float>[] buckets = new Vector[n];
-
-        for (int i = 0; i < n; i++) {
-            buckets[i] = new Vector<Float>();
+//calculate the hash and assigns elements to the proper bucket
+        for (double num : array) {
+            buckets[hash(num, bktSize)].add(num);
         }
-
-        // 2) Put array elements in different buckets
-        for (int i = 0; i < n; i++) {
-            float idx = arr[i] * n;
-            buckets[(int) idx].add(arr[i]);
+//iterate over the buckets and sorts the elements
+        for (List<Double> bucket : buckets) {
+//sorts the bucket
+            Collections.sort(bucket);
         }
-
-        // 3) Sort individual buckets
-        for (int i = 0; i < n; i++) {
-            Collections.sort(buckets[i]);
-        }
-
-        // 4) Concatenate all buckets into arr[]
         int index = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < buckets[i].size(); j++) {
-                arr[index++] = buckets[i].get(j);
+//gathered the buckets after sorting
+        for (List<Double> bucket : buckets) {
+            for (double num : bucket) {
+                array[index++] = num;
             }
         }
+        return array;
     }
-    public static void printArray(float arr[], int size) {
-        int i;
-        for (i = 0; i < size; i++)
-            System.out.print(arr[i] + " ");
+
+    //distributing elements
+    private static int hash(double num, int bucketSize) {
+        return (int) (num / bucketSize);
+    }
+
+    public static void printArray(double[] arr) {
+        System.out.print("Array after sort: ");
+        for (double i : arr)
+            System.out.print(i + " ");
         System.out.println("\nBucket Sort\n Complexity: O(n)");
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }
